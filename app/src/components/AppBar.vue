@@ -3,7 +3,7 @@
         <v-app-bar color="dark" dense dark>
             <v-app-bar-nav-icon @click="controleNavigation = true">
             </v-app-bar-nav-icon>
-            <v-toolbar-title>Desafio AZI</v-toolbar-title>
+            <v-toolbar-title>Desafio <span style="color: #fb8c00">AZI</span></v-toolbar-title>
         </v-app-bar>
         <v-navigation-drawer
                 color="black"
@@ -61,9 +61,9 @@
                 } else if (acao.label === 'Cadastrar proposta') {
                     const path = `/cadastrar-proposta`
                     const regexReload = /cadastrar.*/gi
-                    if(this.$route.path.match(regexReload)){
+                    if (this.$route.path.match(regexReload)) {
                         this.$router.go()
-                    }else if (this.$route.path !== path){
+                    } else if (this.$route.path !== path) {
                         this.$router.push(path)
                     }
                 } else if (acao.label === 'Listar propostas') {
