@@ -56,7 +56,9 @@
         methods: {
             chamarRota(acao){
                 if(acao.label === 'Cadastrar proposta'){
-                    this.$route.push()
+                    this.$router.push('/cadastrar-proposta')
+                } else if(acao.label === 'Inicio') {
+                    this.$router.push('/')
                 }
             }
         }
