@@ -10,7 +10,7 @@
                 v-model="controleNavigation"
                 absolute temporary>
             <v-list nav dense>
-                <v-list-item v-for="acao in acoes" @click="chamarRota(acao)">
+                <v-list-item v-for="acao in acoes" :key="acao.label" @click="chamarRota(acao)">
                     <v-list-item-icon>
                         <v-icon color="white">{{acao.icon}}</v-icon>
                     </v-list-item-icon>
@@ -56,9 +56,9 @@
         methods: {
             chamarRota(acao) {
                 if (acao.label === 'Inicio') {
-                    this.$router.push('/cadastrar-proposta')
-                } else if (acao.label === 'Cadastrar proposta') {
                     this.$router.push('/')
+                } else if (acao.label === 'Cadastrar proposta') {
+                    this.$router.push('/cadastrar-proposta')
                 } else if (acao.label === 'Listar propostas') {
                     this.$router.push('/listar-propostas')
                 }
