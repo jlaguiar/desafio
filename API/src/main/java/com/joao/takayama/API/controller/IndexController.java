@@ -1,9 +1,10 @@
 package com.joao.takayama.API.controller;
 
 import com.joao.takayama.API.entity.Proposta;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.joao.takayama.API.propostas.IProposta;
+import com.sun.istack.internal.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,11 +12,16 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
-
+    @Autowired
+    private IProposta iProposta;
 
     @GetMapping("/propostas")
-    private void propostas(){
-        List<Proposta> propostas;
+    private List<Proposta> propostas(){
+       return iProposta.buscarPropostas();
+    }
 
+    @PostMapping("/proposta")
+    private void salvarProposta(@NotNull @RequestBody Proposta proposta){
+        iProposta.salvar(proposta);
     }
 }
