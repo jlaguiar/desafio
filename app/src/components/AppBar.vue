@@ -14,7 +14,7 @@
                     <v-list-item-icon>
                         <v-icon color="white">{{acao.icon}}</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title style="color: white; font-size: 15px"  >{{acao.label}}</v-list-item-title>
+                    <v-list-item-title style="color: white; font-size: 15px">{{acao.label}}</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
@@ -24,7 +24,7 @@
 <script>
     export default {
         name: "AppBar",
-        data: () =>({
+        data: () => ({
             controleNavigation: false,
             acoes: [
                 {
@@ -54,11 +54,13 @@
             ]
         }),
         methods: {
-            chamarRota(acao){
-                if(acao.label === 'Cadastrar proposta'){
+            chamarRota(acao) {
+                if (acao.label === 'Inicio') {
                     this.$router.push('/cadastrar-proposta')
-                } else if(acao.label === 'Inicio') {
+                } else if (acao.label === 'Cadastrar proposta') {
                     this.$router.push('/')
+                } else if (acao.label === 'Listar propostas') {
+                    this.$router.push('/listar-propostas')
                 }
             }
         }

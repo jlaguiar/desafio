@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Inicio from '../views/Inicio.vue'
-import CadastrarProposta from '../views/cadastrar-proposta/CadastrarProposta'
-
+import CadastrarProposta from '../views/proposta/CadastrarProposta'
+import ListarPropostas from '../views/proposta/ListarPropostas'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +15,11 @@ const routes = [
         path: '/cadastrar-proposta',
         name: 'cadastrarProposta',
         component: CadastrarProposta
+    },
+    {
+        path: '/listar-propostas',
+        name: 'listarPropostas',
+        component: ListarPropostas
     },
 ]
 
