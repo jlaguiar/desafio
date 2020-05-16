@@ -12,9 +12,16 @@ const routes = [
         component: Inicio
     },
     {
-        path: '/cadastrar-proposta',
+        path: '/cadastrar-proposta/',
         name: 'cadastrarProposta',
         component: CadastrarProposta
+
+    },
+    {
+        path: '/cadastrar-proposta/:proposta',
+        name: 'cadastrarPropostaParametros',
+        component: CadastrarProposta,
+        props: true
     },
     {
         path: '/listar-propostas',

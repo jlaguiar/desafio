@@ -56,11 +56,19 @@
         methods: {
             chamarRota(acao) {
                 if (acao.label === 'Inicio') {
-                    this.$router.push('/')
+                    const path = `/`
+                    if (this.$route.path !== path) this.$router.push(path)
                 } else if (acao.label === 'Cadastrar proposta') {
-                    this.$router.push('/cadastrar-proposta')
+                    const path = `/cadastrar-proposta`
+                    const regexReload = /cadastrar.*/gi
+                    if(this.$route.path.match(regexReload)){
+                        this.$router.go()
+                    }else if (this.$route.path !== path){
+                        this.$router.push(path)
+                    }
                 } else if (acao.label === 'Listar propostas') {
-                    this.$router.push('/listar-propostas')
+                    const path = `/listar-propostas`
+                    if (this.$route.path !== path) this.$router.push(path)
                 }
             }
         }

@@ -60,7 +60,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -70,7 +70,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -80,7 +80,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -90,7 +90,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -100,7 +100,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -110,7 +110,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -120,7 +120,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -130,7 +130,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Menor preço'
                     }
                 },
                 {
@@ -140,7 +140,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -150,7 +150,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -160,7 +160,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -170,7 +170,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -180,7 +180,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -190,7 +190,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -200,7 +200,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
                 {
@@ -210,7 +210,7 @@
                     dataCadastro: '23/10/2019 10:00',
                     licitacao: {
                         descricao: 'Uma descrição',
-                        tipoClassificacao: ''
+                        tipoClassificacao: 'Nota preço'
                     }
                 },
 
@@ -218,7 +218,7 @@
         }),
         methods: {
             editarProposta(proposta) {
-                alert(proposta)
+                this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
             excluirProposta() {
 

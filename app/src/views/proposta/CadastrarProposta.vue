@@ -1,5 +1,5 @@
 <template>
-    <card-titulo titulo="Cadastrar Proposta">
+    <card-titulo :titulo="titulo">
         <v-card-text>
             <v-layout row justify-start>
                 <v-col cols="12" sm="6" xs="12">
@@ -68,7 +68,23 @@
     export default {
         name: 'CadastrarProposta',
         components: {CardTitulo},
+        props: {
+            proposta: {
+                required: false,
+                default:() => ( {
+                    fornecedor: '',
+                    nota: '',
+                    preco: '',
+                    dataCadastro: '',
+                    licitacao: {
+                        descricao: '',
+                        tipoClassificacao: ''
+                    }
+                })
+            }
+        },
         data: () => ({
+            titulo: '',
             novaProposta: {
                 fornecedor: '',
                 nota: '',
@@ -80,8 +96,11 @@
                 }
             },
             requeridVazio: value => !!value || 'Nao pode ser vazio',
-            tiposClassificacao: ['Menor preço', 'Nota preço'],
+            tiposClassificacao: ['Menor preço', 'Nota preço']
         }),
+        mounted() {
+            this.preencherNovaProposta()
+        },
         methods: {
             limpar() {
                 this.novaProposta.fornecedor = ''
@@ -91,6 +110,21 @@
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
             salvar() {
+
+            },
+            preencherNovaProposta(){
+                if(this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined){
+                    this.titulo = 'Editar proposta'
+                    this.novaProposta.fornecedor = this.proposta.fornecedor
+                    this.novaProposta.preco = this.proposta.preco
+                    this.novaProposta.nota = this.proposta.nota
+                    this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
+                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao
+                }else{
+                    this.titulo = 'Cadastrar proposta'
+                    this.limpar()
+                }
+
 
             }
         }
