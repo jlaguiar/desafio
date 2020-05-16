@@ -32,7 +32,8 @@
 
 <script>
     import CardTitulo from '../../components/CardTitulo'
-
+    import {mapActions} from 'vuex'
+    import axios from 'axios'
     export default {
         name: 'ListarPropostas',
         components: {CardTitulo},
@@ -52,176 +53,24 @@
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
             ],
-            listaPropostas: [
-                {
-                    fornecedor: 'A',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'B',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Menor preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-                {
-                    fornecedor: 'C',
-                    nota: '8.0',
-                    preco: '115,00',
-                    dataCadastro: '23/10/2019 10:00',
-                    licitacao: {
-                        descricao: 'Uma descrição',
-                        tipoClassificacao: 'Nota preço'
-                    }
-                },
-
-            ],
+            listaPropostas: [],
         }),
+        mounted() {
+            this.preencherLista()
+        },
         methods: {
+            ...mapActions(['buscarPropostas']),
             editarProposta(proposta) {
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
             excluirProposta() {
 
+            },
+            async preencherLista(){
+                debugger
+                const {data} = await axios.get('http://localhost:8080/propostas')
+                this.listaPropostas = data
+                debugger
             }
 
         }
