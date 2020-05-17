@@ -28,6 +28,17 @@
                         </template>
                     </v-text-field>
                 </v-col>
+                <v-col cols="12" sm="6" xs="12">
+                    <v-text-field
+                            v-model="novaProposta.preco">
+                        <template slot="label">
+                            Preço <span style="color: rgb(199,15,15); font-size: 12px">*</span>
+                        </template>
+                        <template slot="append-outer">
+                            <tooltip-numeros/>
+                        </template>
+                    </v-text-field>
+                </v-col>
                 <v-col cols="12" sm="6" xs="12"
                        v-if="novaProposta.licitacao.tipoClassificacao === 'Nota preço'">
                     <v-text-field
@@ -35,13 +46,8 @@
                         <template slot="label">
                             Nota <span style="color: rgb(199,15,15); font-size: 12px">*</span>
                         </template>
-                    </v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" xs="12">
-                    <v-text-field
-                            v-model="novaProposta.preco">
-                        <template slot="label">
-                            Preço <span style="color: rgb(199,15,15); font-size: 12px">*</span>
+                        <template slot="append-outer">
+                            <tooltip-numeros/>
                         </template>
                     </v-text-field>
                 </v-col>
@@ -65,10 +71,11 @@
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
     import BarraCarregamento from '../../components/BarraCarregamento'
+    import TooltipNumeros from '../../components/TooltipNumeros'
 
     export default {
         name: 'CadastrarProposta',
-        components: {CardTitulo,BarraCarregamento},
+        components: {CardTitulo, BarraCarregamento, TooltipNumeros},
         props: {
             proposta: {
                 required: false,
@@ -98,10 +105,32 @@
                     tipoClassificacao: ''
                 }
             },
-            tiposClassificacao: ['Menor preço', 'Nota preço']
+            tiposClassificacao: ['Menor preço', 'Nota preço'],
         }),
         mounted() {
             this.preencherNovaProposta()
+        },
+        computed: {
+            validarCampos() {
+                if (this.novaProposta.fornecedor === '' || this.novaProposta.preco === ''
+                    || this.novaProposta.licitacao.tipoClassificacao === '' || this.novaProposta.licitacao.descricao === '') {
+                    return false
+                } else if (this.novaProposta.licitacao.tipoClassificacao === 'Nota preço' && this.novaProposta.nota === '') {
+                    return false
+                } else {
+                    return true
+                }
+            },
+            validarNotaPreco() {
+                const expressaoRegexNumeros = /[0-9.]+/g
+                this.novaProposta.preco = this.novaProposta.preco.toString()
+                this.novaProposta.nota = this.novaProposta.nota.toString()
+                if (!this.novaProposta.preco.match(expressaoRegexNumeros) ||
+                    (this.novaProposta.licitacao.tipoClassificacao === 'Nota preço' && !this.novaProposta.nota.match(expressaoRegexNumeros))) {
+                    return false
+                }
+                return true
+            }
         },
         methods: {
             ...mapActions(['salvar', 'editar']),
@@ -113,7 +142,15 @@
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
             async salvarProposta() {
-                if(this.validarCampos()){
+                try {
+                    if (!this.validarNotaPreco) {
+                        this.$toasted.global.defaultError({msg: 'Formulario preenchido incorretamente'})
+                        return
+                    }
+                    if (!this.validarCampos) {
+                        this.$toasted.global.defaultError({msg: 'Preencha o formulário'})
+                        return
+                    }
                     this.ajustarClassificacao()
                     this.dialogCarregamento = true
                     if (!this.ehEditar) {
@@ -124,18 +161,23 @@
                     this.dialogCarregamento = false
                     this.$toasted.global.defaultSuccess()
                     this.limpar()
-                }else{
-                    this.$toasted.global.defaultError({msg: 'Preencha o formulário'})
-                }
 
+                } catch (e) {
+                    this.$toasted.global.defaultError()
+                    this.limpar()
+                    this.dialogCarregamento = false
+                }
             },
             ajustarClassificacao() {
                 this.novaProposta.licitacao.tipoClassificacao = this.novaProposta.licitacao.tipoClassificacao === 'Menor preço' ? 'MENOR_PRECO' : 'NOTA_PRECO'
+                if(this.novaProposta.licitacao.tipoClassificacao === 'MENOR_PRECO') {
+                    this.novaProposta.nota = ''
+                }
             },
             preencherNovaProposta() {
                 if (this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined) {
                     this.titulo = 'Editar proposta'
-                    this.editar = true
+                    this.ehEditar = true
                     this.novaProposta.id = this.proposta.id
                     this.novaProposta.fornecedor = this.proposta.fornecedor
                     this.novaProposta.preco = this.proposta.preco
@@ -149,14 +191,6 @@
                     this.limpar()
                 }
             },
-            validarCampos() {
-                if (this.novaProposta.fornecedor === '' || this.novaProposta.preco === ''
-                    || this.novaProposta.licitacao.tipoClassificacao === '' || this.novaProposta.licitacao.descricao === '') {
-                    return false
-                }else{
-                    return true
-                }
-            }
         }
     }
 </script>

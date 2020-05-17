@@ -58,7 +58,6 @@
                     sortable: false,
                     value: 'fornecedor',
                 },
-                {text: 'Nota', value: 'nota'},
                 {text: 'Preço (R$)', value: 'preco'},
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
