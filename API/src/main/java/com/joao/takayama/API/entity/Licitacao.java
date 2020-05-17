@@ -14,5 +14,5 @@ public class Licitacao {
 
     private String descricao;
 
-    private EnumClassificacao classificacao;
+    private EnumClassificacao tipoClassificacao;
 }

@@ -117,9 +117,11 @@
                     this.titulo = 'Editar proposta'
                     this.novaProposta.fornecedor = this.proposta.fornecedor
                     this.novaProposta.preco = this.proposta.preco
-                    this.novaProposta.nota = this.proposta.nota
                     this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
-                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao
+                    if(this.proposta.licitacao.tipoClassificacao === 'NOTA_PRECO'){
+                        this.novaProposta.nota = this.proposta.nota
+                    }
+                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao === 'MENOR_PRECO'? 'Menor preço' : 'Nota preço'
                 }else{
                     this.titulo = 'Cadastrar proposta'
                     this.limpar()
