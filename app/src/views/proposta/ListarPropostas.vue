@@ -58,7 +58,6 @@
                     sortable: false,
                     value: 'fornecedor',
                 },
-                {text: 'Descrição', value: 'licitacao.descricao', sortable: false},
                 {text: 'Preço (R$)', value: 'preco', sortable: false},
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
