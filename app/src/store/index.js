@@ -22,8 +22,9 @@ export default new Vuex.Store({
       await axios.delete(`http://localhost:8080/proposta/${id}`)
       return
     },
-    async salvar(){
-      await axios.delete(`http://localhost:8080/proposta/${id}`)
+    async salvar(context, proposta){
+      debugger
+      await axios.post('http://localhost:8080/proposta', proposta)
     },
     async editar(){
 
