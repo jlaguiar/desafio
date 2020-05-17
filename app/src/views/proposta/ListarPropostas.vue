@@ -58,7 +58,7 @@
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
     import DialogExclusao from './DialogExclusao'
-
+    import axios from 'axios'
     export default {
         name: 'ListarPropostas',
         components: {CardTitulo, DialogExclusao},
@@ -85,7 +85,7 @@
             this.preencherLista()
         },
         methods: {
-            ...mapActions(['buscarPropostas','excluirProposta']),
+            ...mapActions(['buscarPropostas','excluir']),
             editarProposta(proposta) {
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
@@ -96,9 +96,11 @@
                 this.dialogVerificacaoExcluir = true
             },
             async excluirProposta(proposta) {
-                this.dialog = true
-                await this.
                 this.fecharDialog()
+                this.dialog = true
+                await this.excluir(proposta.id)
+                this.listaPropostas = await this.buscarPropostas()
+                this.dialog = false
             },
             async preencherLista() {
                 this.listaPropostas = await this.buscarPropostas()

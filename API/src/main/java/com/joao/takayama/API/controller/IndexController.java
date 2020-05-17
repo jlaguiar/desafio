@@ -14,6 +14,11 @@ public class IndexController {
     @Autowired
     private IProposta iProposta;
 
+    @DeleteMapping("/proposta/{id}")
+    private void excluiProposta(@PathVariable("id") String id){
+        iProposta.excluir(id);
+    }
+
     @GetMapping("/propostas")
     private List<Proposta> propostas(){
        return iProposta.buscarPropostas();
@@ -23,4 +28,6 @@ public class IndexController {
     private void salvarProposta(@RequestBody Proposta proposta){
         iProposta.salvar(proposta);
     }
+
+
 }

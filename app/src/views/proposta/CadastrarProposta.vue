@@ -84,6 +84,7 @@
             }
         },
         data: () => ({
+            editar: false,
             titulo: '',
             novaProposta: {
                 fornecedor: '',
@@ -102,6 +103,7 @@
             this.preencherNovaProposta()
         },
         methods: {
+            ...mapActions(['salvar']),
             limpar() {
                 this.novaProposta.fornecedor = ''
                 this.novaProposta.nota = ''
@@ -109,12 +111,17 @@
                 this.novaProposta.licitacao.descricao = ''
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
-            salvar() {
+            salvarProposta() {
+                if(!this.editar){
+                    this.salvar
+                }else{
 
+                }
             },
             preencherNovaProposta(){
                 if(this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined){
                     this.titulo = 'Editar proposta'
+                    this.editar = true
                     this.novaProposta.fornecedor = this.proposta.fornecedor
                     this.novaProposta.preco = this.proposta.preco
                     this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao

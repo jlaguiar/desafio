@@ -18,9 +18,9 @@ export default new Vuex.Store({
       const {data} = await api.get('propostas')
       return data
     },
-    async excluirProposta(context, idProposta){
-      await api.delete(`proposta/${idProposta}`)
-      return true
+    async excluir(context,id){
+      await axios.delete(`http://localhost:8080/proposta/${id}`)
+      return
     }
   },
   modules: {
