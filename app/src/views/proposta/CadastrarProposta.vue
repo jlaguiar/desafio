@@ -114,15 +114,16 @@
             },
             async salvarProposta() {
                 if(this.validarCampos()){
+                    this.ajustarClassificacao()
+                    this.dialogCarregamento = true
                     if (!this.ehEditar) {
-                        this.ajustarClassificacao()
-                        this.dialogCarregamento = true
                         await this.salvar(this.novaProposta)
-                        this.limpar()
-                        this.dialogCarregamento = false
                     } else {
-                        this.editar(this.novaProposta)
+                        await this.editar(this.novaProposta)
                     }
+                    this.dialogCarregamento = false
+                    this.$toasted.global.defaultSuccess()
+                    this.limpar()
                 }else{
                     console.log('nao pode')
                 }
