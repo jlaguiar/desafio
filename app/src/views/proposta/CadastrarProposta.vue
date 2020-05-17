@@ -55,35 +55,20 @@
                    elevation="0" @click="salvarProposta">Salvar
             </v-btn>
         </v-card-actions>
+        <barra-carregamento :dialog="dialogCarregamento"
+                            label="Salvando"/>
 
-        <v-dialog
-                v-model="dialog"
-                hide-overlay
-                persistent
-                width="300">
-            <v-card
-                    color="black"
-                    dark>
-                <v-card-text>
-                    Excluindo
-                    <v-progress-linear
-                            indeterminate
-                            color="white"
-                            class="mb-0"
-                    ></v-progress-linear>
-                </v-card-text>
-            </v-card>
-        </v-dialog>
     </card-titulo>
 </template>
 
 <script>
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
+    import BarraCarregamento from '../../components/BarraCarregamento'
 
     export default {
         name: 'CadastrarProposta',
-        components: {CardTitulo},
+        components: {CardTitulo,BarraCarregamento},
         props: {
             proposta: {
                 required: false,
@@ -101,7 +86,7 @@
         },
         data: () => ({
             ehEditar: false,
-            dialog: false,
+            dialogCarregamento: false,
             titulo: '',
             novaProposta: {
                 fornecedor: '',
@@ -131,10 +116,10 @@
                 if(this.validarCampos()){
                     if (!this.ehEditar) {
                         this.ajustarClassificacao()
-                        this.dialog = true
+                        this.dialogCarregamento = true
                         await this.salvar(this.novaProposta)
                         this.limpar()
-                        this.dialog = false
+                        this.dialogCarregamento = false
                     } else {
                         this.editar(this.novaProposta)
                     }

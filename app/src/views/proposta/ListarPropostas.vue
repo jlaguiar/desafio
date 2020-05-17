@@ -31,24 +31,8 @@
                 @fecharDialog="fecharDialog"
                 @excluirProposta="excluirProposta"
         />
-        <v-dialog
-                v-model="dialog"
-                hide-overlay
-                persistent
-                width="300">
-            <v-card
-                    color="black"
-                    dark>
-                <v-card-text>
-                    Excluindo
-                    <v-progress-linear
-                            indeterminate
-                            color="white"
-                            class="mb-0"
-                    ></v-progress-linear>
-                </v-card-text>
-            </v-card>
-        </v-dialog>
+        <barra-carregamento :dialog="dialogCarregar"
+                            label="Excluindo"/>
     </card-titulo>
 </template>
 
@@ -56,12 +40,13 @@
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
     import DialogExclusao from './DialogExclusao'
+    import BarraCarregamento from '../../components/BarraCarregamento'
 
     export default {
         name: 'ListarPropostas',
-        components: {CardTitulo, DialogExclusao},
+        components: {CardTitulo, DialogExclusao, BarraCarregamento},
         data: () => ({
-            dialog: false,
+            dialogCarregar: false,
             propostaExcluir: {},
             dialogVerificacaoExcluir: false,
             quantidadePaginas: 0,
@@ -84,7 +69,7 @@
             this.preencherLista()
         },
         methods: {
-            ...mapActions(['buscarPropostas','excluir']),
+            ...mapActions(['buscarPropostas', 'excluir']),
             editarProposta(proposta) {
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
@@ -97,10 +82,10 @@
             },
             async excluirProposta() {
                 this.fecharDialog()
-                this.dialog = true
+                this.dialogCarregar = true
                 await this.excluir(this.propostaExcluir.id)
                 this.listaPropostas = await this.buscarPropostas()
-                this.dialog = false
+                this.dialogCarregar = false
             },
             async preencherLista() {
                 this.listaPropostas = await this.buscarPropostas()
