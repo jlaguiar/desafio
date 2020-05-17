@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
-public class PropostasIpml implements IProposta{
+public class PropostasIpml implements IProposta {
 
     @Autowired
     private BuscarPropostas buscarPropostas;

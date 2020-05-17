@@ -29,5 +29,10 @@ public class IndexController {
         iProposta.salvar(proposta);
     }
 
+    @PutMapping("/proposta")
+    private void editarProposta(@RequestBody Proposta proposta){
+        iProposta.salvar(proposta);
+    }
+
 
 }

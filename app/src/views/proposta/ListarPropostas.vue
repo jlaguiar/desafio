@@ -20,37 +20,35 @@
                             color="rgb(199,15,15)">
                         mdi-delete
                     </v-icon>
-                    <dialog-exclusao
-                            :dialog-verificacao-excluir="dialogVerificacaoExcluir"
-                            :proposta="item"
-                            @fecharDialog="fecharDialog"
-                            @excluirProposta="excluirProposta"
-                    />
-
-                    <v-dialog
-                            v-model="dialog"
-                            hide-overlay
-                            persistent
-                            width="300">
-                        <v-card
-                                color="black"
-                                dark>
-                            <v-card-text>
-                                Excluindo
-                                <v-progress-linear
-                                        indeterminate
-                                        color="white"
-                                        class="mb-0"
-                                ></v-progress-linear>
-                            </v-card-text>
-                        </v-card>
-                    </v-dialog>
                 </template>
             </v-data-table>
             <div class="text-center pt-2">
                 <v-pagination v-model="pagina" :length="quantidadePaginas"></v-pagination>
             </div>
         </v-card-text>
+        <dialog-exclusao
+                :dialog-verificacao-excluir="dialogVerificacaoExcluir"
+                @fecharDialog="fecharDialog"
+                @excluirProposta="excluirProposta"
+        />
+        <v-dialog
+                v-model="dialog"
+                hide-overlay
+                persistent
+                width="300">
+            <v-card
+                    color="black"
+                    dark>
+                <v-card-text>
+                    Excluindo
+                    <v-progress-linear
+                            indeterminate
+                            color="white"
+                            class="mb-0"
+                    ></v-progress-linear>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
     </card-titulo>
 </template>
 
@@ -58,12 +56,13 @@
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
     import DialogExclusao from './DialogExclusao'
-    import axios from 'axios'
+
     export default {
         name: 'ListarPropostas',
         components: {CardTitulo, DialogExclusao},
         data: () => ({
             dialog: false,
+            propostaExcluir: {},
             dialogVerificacaoExcluir: false,
             quantidadePaginas: 0,
             itensPorPagina: 10,
@@ -92,13 +91,14 @@
             fecharDialog() {
                 this.dialogVerificacaoExcluir = false
             },
-            verificarExcluir() {
+            verificarExcluir(proposta) {
                 this.dialogVerificacaoExcluir = true
+                this.propostaExcluir = proposta
             },
-            async excluirProposta(proposta) {
+            async excluirProposta() {
                 this.fecharDialog()
                 this.dialog = true
-                await this.excluir(proposta.id)
+                await this.excluir(this.propostaExcluir.id)
                 this.listaPropostas = await this.buscarPropostas()
                 this.dialog = false
             },

@@ -19,15 +19,14 @@ export default new Vuex.Store({
       return data
     },
     async excluir(context,id){
-      await axios.delete(`http://localhost:8080/proposta/${id}`)
+      await api.delete(`proposta/${id}`)
       return
     },
     async salvar(context, proposta){
-      debugger
-      await axios.post('http://localhost:8080/proposta', proposta)
+      await api.post('proposta', proposta)
     },
-    async editar(){
-
+    async editar(context, proposta){
+      await api.put('proposta', proposta)
     }
   },
   modules: {

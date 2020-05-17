@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IProposta {
 
+
     void excluir(String id);
 
     void salvar(Proposta proposta);

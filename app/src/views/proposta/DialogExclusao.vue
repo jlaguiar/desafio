@@ -19,13 +19,14 @@
 <script>
     export default {
         name: 'DialogExclusao',
-        props: ['dialogVerificacaoExcluir', 'proposta'],
+        props: ['dialogVerificacaoExcluir'],
         methods: {
             fecharDialog(){
+                this.dialog = false
                 this.$emit('fecharDialog')
             },
             excluir(){
-                this.$emit('excluirProposta', this.proposta)
+                this.$emit('excluirProposta')
             }
         }
     }

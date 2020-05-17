@@ -87,7 +87,7 @@
         props: {
             proposta: {
                 required: false,
-                default:() => ( {
+                default: () => ({
                     fornecedor: '',
                     nota: '',
                     preco: '',
@@ -128,35 +128,47 @@
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
             async salvarProposta() {
-                this.validarCampos()
-                if(!this.ehEditar){
-                    this.ajustarClassificacao()
-                    this.dialog = true
-                    await this.salvar(this.novaProposta)
-                    this.limpar()
-                    this.dialog = false
+                if(this.validarCampos()){
+                    if (!this.ehEditar) {
+                        this.ajustarClassificacao()
+                        this.dialog = true
+                        await this.salvar(this.novaProposta)
+                        this.limpar()
+                        this.dialog = false
+                    } else {
+                        this.editar(this.novaProposta)
+                    }
                 }else{
-                    this.editar(this.novaProposta)
+                    console.log('nao pode')
                 }
+
             },
-            ajustarClassificacao(){
+            ajustarClassificacao() {
                 this.novaProposta.licitacao.tipoClassificacao = this.novaProposta.licitacao.tipoClassificacao === 'Menor preço' ? 'MENOR_PRECO' : 'NOTA_PRECO'
             },
-            preencherNovaProposta(){
-                if(this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined){
+            preencherNovaProposta() {
+                if (this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined) {
                     this.titulo = 'Editar proposta'
                     this.editar = true
                     this.novaProposta.id = this.proposta.id
                     this.novaProposta.fornecedor = this.proposta.fornecedor
                     this.novaProposta.preco = this.proposta.preco
                     this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
-                    if(this.proposta.licitacao.tipoClassificacao === 'NOTA_PRECO'){
+                    if (this.proposta.licitacao.tipoClassificacao === 'NOTA_PRECO') {
                         this.novaProposta.nota = this.proposta.nota
                     }
-                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao === 'MENOR_PRECO'? 'Menor preço' : 'Nota preço'
-                }else{
+                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao === 'MENOR_PRECO' ? 'Menor preço' : 'Nota preço'
+                } else {
                     this.titulo = 'Cadastrar proposta'
                     this.limpar()
+                }
+            },
+            validarCampos() {
+                if (this.novaProposta.fornecedor === '' || this.novaProposta.preco === ''
+                    || this.novaProposta.licitacao.tipoClassificacao === '' || this.novaProposta.licitacao.descricao === '') {
+                    return false
+                }else{
+                    return true
                 }
             }
         }
