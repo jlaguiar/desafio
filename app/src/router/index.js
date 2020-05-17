@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Inicio from '../views/Inicio.vue'
 import CadastrarProposta from '../views/proposta/CadastrarProposta'
 import ListarPropostas from '../views/proposta/ListarPropostas'
+import MaiorNota from "../views/proposta/maior-nota/MaiorNota";
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
         path: '/listar-propostas',
         name: 'listarPropostas',
         component: ListarPropostas
+    },
+    {
+        path: '/maior-nota',
+        name: 'maiorNota',
+        component: MaiorNota
     },
 ]
 
