@@ -141,18 +141,12 @@
                 }
             },
             limpar() {
-           //     this.preencherDataAtual()
-           //     alert(this.novaProposta.dataCadastro)
                 this.novaProposta.fornecedor = ''
                 this.novaProposta.nota = ''
                 this.novaProposta.preco = ''
                 this.novaProposta.licitacao.descricao = ''
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
-            // preencherDataAtual(){
-            //     const dataAtual = new Date()
-            //     this.novaProposta.dataCadastro = `${dataAtual.getDate()}/${dataAtual.getMonth()+1}/${dataAtual.getFullYear()} ${dataAtual.getHours()}:${dataAtual.getMinutes()}:${dataAtual.getSeconds()}`
-            // },
             preencherNovaProposta() {
                 if (this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined) {
                     this.titulo = 'Editar proposta'

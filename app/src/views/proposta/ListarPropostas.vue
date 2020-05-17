@@ -58,7 +58,8 @@
                     sortable: false,
                     value: 'fornecedor',
                 },
-                {text: 'Preço (R$)', value: 'preco'},
+                {text: 'Descrição', value: 'licitacao.descricao', sortable: false},
+                {text: 'Preço (R$)', value: 'preco', sortable: false},
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
             ],
@@ -72,13 +73,6 @@
             editarProposta(proposta) {
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
-            fecharDialog() {
-                this.dialogVerificacaoExcluir = false
-            },
-            verificarExcluir(proposta) {
-                this.dialogVerificacaoExcluir = true
-                this.propostaExcluir = proposta
-            },
             async excluirProposta() {
                 this.fecharDialog()
                 this.dialogCarregar = true
@@ -86,10 +80,16 @@
                 this.listaPropostas = await this.buscarPropostas()
                 this.dialogCarregar = false
             },
+            fecharDialog() {
+                this.dialogVerificacaoExcluir = false
+            },
             async preencherLista() {
                 this.listaPropostas = await this.buscarPropostas()
+            },
+            verificarExcluir(proposta) {
+                this.dialogVerificacaoExcluir = true
+                this.propostaExcluir = proposta
             }
-
         }
     }
 </script>
