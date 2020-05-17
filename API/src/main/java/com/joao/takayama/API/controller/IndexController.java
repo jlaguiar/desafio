@@ -2,7 +2,6 @@ package com.joao.takayama.API.controller;
 
 import com.joao.takayama.API.entity.Proposta;
 import com.joao.takayama.API.propostas.IProposta;
-import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class IndexController {
     }
 
     @PostMapping("/proposta")
-    private void salvarProposta(@NotNull @RequestBody Proposta proposta){
+    private void salvarProposta(@RequestBody Proposta proposta){
         iProposta.salvar(proposta);
     }
 }

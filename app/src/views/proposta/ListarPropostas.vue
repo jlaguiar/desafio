@@ -67,10 +67,7 @@
 
             },
             async preencherLista(){
-                debugger
-                const {data} = await axios.get('http://localhost:8080/propostas')
-                this.listaPropostas = data
-                debugger
+                this.listaPropostas = await this.buscarPropostas()
             }
 
         }

@@ -8,8 +8,6 @@ const api = axios.create({
   baseURL: 'http://localhost:8080/'
 });
 
-
-
 export default new Vuex.Store({
   state: {
   },
@@ -17,9 +15,7 @@ export default new Vuex.Store({
   },
   actions: {
     async buscarPropostas(context){
-      debugger
-      const {data} = api.get("/propostas")
-      debugger
+      const {data} = await api.get('propostas')
       return data
     }
   },
