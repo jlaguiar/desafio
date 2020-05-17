@@ -64,6 +64,7 @@
 
 <script>
     import CardTitulo from '../../components/CardTitulo'
+    import {mapActions} from 'vuex'
 
     export default {
         name: 'CadastrarProposta',
@@ -84,7 +85,7 @@
             }
         },
         data: () => ({
-            editar: false,
+            ehEditar: false,
             titulo: '',
             novaProposta: {
                 fornecedor: '',
@@ -103,7 +104,7 @@
             this.preencherNovaProposta()
         },
         methods: {
-            ...mapActions(['salvar']),
+            ...mapActions(['salvar', 'editar']),
             limpar() {
                 this.novaProposta.fornecedor = ''
                 this.novaProposta.nota = ''
@@ -112,16 +113,17 @@
                 this.novaProposta.licitacao.tipoClassificacao = ''
             },
             salvarProposta() {
-                if(!this.editar){
-                    this.salvar
+                if(!this.ehEditar){
+                    this.salvar(this.novaProposta)
                 }else{
-
+                    this.editar(this.novaProposta)
                 }
             },
             preencherNovaProposta(){
                 if(this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined){
                     this.titulo = 'Editar proposta'
                     this.editar = true
+                    this.novaProposta.id = this.proposta.id
                     this.novaProposta.fornecedor = this.proposta.fornecedor
                     this.novaProposta.preco = this.proposta.preco
                     this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
