@@ -11,3 +11,9 @@ Vue.toasted.register(
     'Operação realizada com sucesso',
     {type: "success", icon: 'check'}
 )
+
+Vue.toasted.register(
+    'defaultError',
+    payload => !payload.msg ? 'Ocorreu um erro' : payload.msg,
+    {type: "error", icon: 'close'}
+)

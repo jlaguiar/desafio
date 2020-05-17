@@ -125,7 +125,7 @@
                     this.$toasted.global.defaultSuccess()
                     this.limpar()
                 }else{
-                    console.log('nao pode')
+                    this.$toasted.global.defaultError({msg: 'Preencha o formulário'})
                 }
 
             },
