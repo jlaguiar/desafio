@@ -17,6 +17,10 @@ export default new Vuex.Store({
     async buscarPropostas(context){
       const {data} = await api.get('propostas')
       return data
+    },
+    async excluirProposta(context, idProposta){
+      await api.delete(`proposta/${idProposta}`)
+      return true
     }
   },
   modules: {

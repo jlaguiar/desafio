@@ -12,14 +12,39 @@
                     :items-per-page="itensPorPagina"
             >
                 <template v-slot:item.actions="{item}">
-                    <v-icon small class="mr-2" color="blue"
+                    <v-icon small class="mr-2" color="#fb8c00"
                             @click="editarProposta(item)">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="excluirProposta(item)"
+                    <v-icon small @click="verificarExcluir(item)"
                             color="rgb(199,15,15)">
                         mdi-delete
                     </v-icon>
+                    <dialog-exclusao
+                            :dialog-verificacao-excluir="dialogVerificacaoExcluir"
+                            :proposta="item"
+                            @fecharDialog="fecharDialog"
+                            @excluirProposta="excluirProposta"
+                    />
+
+                    <v-dialog
+                            v-model="dialog"
+                            hide-overlay
+                            persistent
+                            width="300">
+                        <v-card
+                                color="black"
+                                dark>
+                            <v-card-text>
+                                Excluindo
+                                <v-progress-linear
+                                        indeterminate
+                                        color="white"
+                                        class="mb-0"
+                                ></v-progress-linear>
+                            </v-card-text>
+                        </v-card>
+                    </v-dialog>
                 </template>
             </v-data-table>
             <div class="text-center pt-2">
@@ -27,18 +52,19 @@
             </div>
         </v-card-text>
     </card-titulo>
-
 </template>
 
 <script>
     import CardTitulo from '../../components/CardTitulo'
     import {mapActions} from 'vuex'
-    import axios from 'axios'
+    import DialogExclusao from './DialogExclusao'
+
     export default {
         name: 'ListarPropostas',
-        components: {CardTitulo},
+        components: {CardTitulo, DialogExclusao},
         data: () => ({
             dialog: false,
+            dialogVerificacaoExcluir: false,
             quantidadePaginas: 0,
             itensPorPagina: 10,
             pagina: 1,
@@ -59,14 +85,22 @@
             this.preencherLista()
         },
         methods: {
-            ...mapActions(['buscarPropostas']),
+            ...mapActions(['buscarPropostas','excluirProposta']),
             editarProposta(proposta) {
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
-            excluirProposta() {
-
+            fecharDialog() {
+                this.dialogVerificacaoExcluir = false
             },
-            async preencherLista(){
+            verificarExcluir() {
+                this.dialogVerificacaoExcluir = true
+            },
+            async excluirProposta(proposta) {
+                this.dialog = true
+                await this.
+                this.fecharDialog()
+            },
+            async preencherLista() {
                 this.listaPropostas = await this.buscarPropostas()
             }
 
