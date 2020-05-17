@@ -134,12 +134,41 @@
         },
         methods: {
             ...mapActions(['salvar', 'editar']),
+            ajustarClassificacao() {
+                this.novaProposta.licitacao.tipoClassificacao = this.novaProposta.licitacao.tipoClassificacao === 'Menor preço' ? 'MENOR_PRECO' : 'NOTA_PRECO'
+                if(this.novaProposta.licitacao.tipoClassificacao === 'MENOR_PRECO') {
+                    this.novaProposta.nota = ''
+                }
+            },
             limpar() {
+           //     this.preencherDataAtual()
+           //     alert(this.novaProposta.dataCadastro)
                 this.novaProposta.fornecedor = ''
                 this.novaProposta.nota = ''
                 this.novaProposta.preco = ''
                 this.novaProposta.licitacao.descricao = ''
                 this.novaProposta.licitacao.tipoClassificacao = ''
+            },
+            // preencherDataAtual(){
+            //     const dataAtual = new Date()
+            //     this.novaProposta.dataCadastro = `${dataAtual.getDate()}/${dataAtual.getMonth()+1}/${dataAtual.getFullYear()} ${dataAtual.getHours()}:${dataAtual.getMinutes()}:${dataAtual.getSeconds()}`
+            // },
+            preencherNovaProposta() {
+                if (this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined) {
+                    this.titulo = 'Editar proposta'
+                    this.ehEditar = true
+                    this.novaProposta.id = this.proposta.id
+                    this.novaProposta.fornecedor = this.proposta.fornecedor
+                    this.novaProposta.preco = this.proposta.preco
+                    this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
+                    if (this.proposta.licitacao.tipoClassificacao === 'NOTA_PRECO') {
+                        this.novaProposta.nota = this.proposta.nota
+                    }
+                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao === 'MENOR_PRECO' ? 'Menor preço' : 'Nota preço'
+                } else {
+                    this.titulo = 'Cadastrar proposta'
+                    this.limpar()
+                }
             },
             async salvarProposta() {
                 try {
@@ -167,30 +196,8 @@
                     this.limpar()
                     this.dialogCarregamento = false
                 }
-            },
-            ajustarClassificacao() {
-                this.novaProposta.licitacao.tipoClassificacao = this.novaProposta.licitacao.tipoClassificacao === 'Menor preço' ? 'MENOR_PRECO' : 'NOTA_PRECO'
-                if(this.novaProposta.licitacao.tipoClassificacao === 'MENOR_PRECO') {
-                    this.novaProposta.nota = ''
-                }
-            },
-            preencherNovaProposta() {
-                if (this.proposta.fornecedor !== '' && this.proposta.fornecedor !== undefined) {
-                    this.titulo = 'Editar proposta'
-                    this.ehEditar = true
-                    this.novaProposta.id = this.proposta.id
-                    this.novaProposta.fornecedor = this.proposta.fornecedor
-                    this.novaProposta.preco = this.proposta.preco
-                    this.novaProposta.licitacao.descricao = this.proposta.licitacao.descricao
-                    if (this.proposta.licitacao.tipoClassificacao === 'NOTA_PRECO') {
-                        this.novaProposta.nota = this.proposta.nota
-                    }
-                    this.novaProposta.licitacao.tipoClassificacao = this.proposta.licitacao.tipoClassificacao === 'MENOR_PRECO' ? 'Menor preço' : 'Nota preço'
-                } else {
-                    this.titulo = 'Cadastrar proposta'
-                    this.limpar()
-                }
-            },
+            }
+
         }
     }
 </script>
