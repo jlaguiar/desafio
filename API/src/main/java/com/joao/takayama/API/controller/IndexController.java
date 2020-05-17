@@ -24,6 +24,11 @@ public class IndexController {
        return iProposta.buscarPropostas();
     }
 
+    @GetMapping("/propostas/notas")
+    private List<Proposta> propostasNota(){
+        return iProposta.buscarPropostasNotas();
+    }
+
     @PostMapping("/proposta")
     private void salvarProposta(@RequestBody Proposta proposta){
         iProposta.salvar(proposta);

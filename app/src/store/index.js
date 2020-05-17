@@ -18,6 +18,10 @@ export default new Vuex.Store({
       const {data} = await api.get('propostas')
       return data
     },
+    async bucarPropostasNotas(context){
+      const {data} = await api.get('propostas/notas')
+      return data
+    },
     async excluir(context,id){
       await api.delete(`proposta/${id}`)
       return

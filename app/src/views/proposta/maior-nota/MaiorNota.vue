@@ -22,16 +22,12 @@
                 <v-pagination v-model="pagina" :length="quantidadePaginas"></v-pagination>
             </div>
         </v-card-text>
-        <dialog-exclusao
-                :dialog-verificacao-excluir="dialogVerificacaoExcluir"
-                @fecharDialog="fecharDialog"
-                @excluirProposta="excluirProposta"
-        />
     </card-titulo>
 </template>
 
 <script>
     import CardTitulo from '../../../components/CardTitulo'
+    import {mapActions} from 'vuex'
     export default {
         name: 'MaiorNota',
         components: {CardTitulo},
@@ -49,11 +45,14 @@
             listaPropostas: [],
         }),
         mounted() {
-
+            this.preencherLista()
         },
         methods: {
+            ...mapActions(['bucarPropostasNotas']),
             verMais(){
-
+            },
+            async preencherLista(){
+                this.listaPropostas = await this.bucarPropostasNotas()
             }
         }
     }
