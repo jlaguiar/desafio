@@ -22,7 +22,7 @@ export default new Vuex.Store({
       const {data} = await api.get('propostas/notas')
       return data
     },
-    async bucarPropostasPreco(context){
+    async bucarPropostasPrecos(context){
       const {data} = await api.get('propostas/precos')
       return data
     },
