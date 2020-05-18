@@ -32,45 +32,39 @@
         },
         methods: {
             ...mapActions(['bucarPropostasPrecos']),
-            async ordenarListaNotaMaior() {
-                await this.listaPropostasNota.sort(function (valor1, valor2) {
-                    if (valor1.nota > valor2.nota) {
+            async ordenarListaMenorPreco() {
+                await this.listaPropostasPreco.sort(function (valor1, valor2) {
+                    if (valor1.preco < valor2.preco) {
                         return -1
-                    } else if (valor1.nota < valor2.nota) {
+                    } else if (valor1.preco > valor2.preco) {
                         return 1
                     } else {
-                        if (valor1.preco < valor2.preco) {
+                        debugger
+                        if (valor1.dataCadastroInteiro < valor2.dataCadastroInteiro) {
                             return -1
-                        } else if (valor1.preco > valor2.preco) {
+                        } else if (valor1.dataCadastroInteiro > valor2.dataCadastroInteiro) {
                             return 1
                         } else {
-                            debugger
-                            if (valor1.dataCadastroInteiro < valor2.dataCadastroInteiro) {
-                                return -1
-                            } else if (valor1.dataCadastroInteiro > valor2.dataCadastroInteiro) {
-                                return 1
-                            } else {
-                                return 0
-                            }
+                            return 0
                         }
                     }
                 })
-                return this.listaPropostasNota
+                return this.listaPropostasPreco
             },
             parseDataParaInteiro() {
-                this.listaPropostasNota.forEach(function (element, index) {
+                this.listaPropostasPreco.forEach(function (element, index) {
                     let projetoModificado = this[index].dataCadastro.replace(/\D/g, ' ')
                     projetoModificado = projetoModificado.split(' ')
                     let projetoJuncao = projetoModificado[2]
                     projetoJuncao = projetoJuncao + projetoModificado[1] + projetoModificado[0] + projetoModificado[3] + projetoModificado[4] + projetoModificado[5]
                     this[index].dataCadastroInteiro = parseInt(projetoJuncao)
-                }, this.listaPropostasNota);
+                }, this.listaPropostasPreco);
             },
             async preencherLista() {
                 this.dialogCarregar = true
-                this.listaPropostas = await this.bucarPropostasPrecos()
-                //this.parseDataParaInteiro()
-                //this.listaPropostas = await this.ordenarListaNotaMaior()
+                this.listaPropostasPreco = await this.bucarPropostasPrecos()
+                this.parseDataParaInteiro()
+                this.listaPropostas = await this.ordenarListaMenorPreco()
                 this.dialogCarregar = false
             },
             verMais(item) {
