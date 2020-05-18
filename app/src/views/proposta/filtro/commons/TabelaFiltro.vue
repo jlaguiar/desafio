@@ -29,12 +29,25 @@
     export default {
         name: 'TabelaFIltro',
         components: {CardTitulo,BarraCarregamento},
-        props: ['propostasLabel','listaPropostas','label'],
+        props: {
+            propostasLabel: {
+                required: true,
+                default: []
+            },
+            listaPropostas: {
+                type: Array,
+                required: true,
+                default: []
+            },
+            label:{
+                required: true,
+                default: 'Classificação'
+            }
+        },
         data: () => ({
             quantidadePaginas: 0,
             itensPorPagina: 10,
             pagina: 1,
-            listaPropostas: [],
             listaPropostasNota: []
         }),
     }

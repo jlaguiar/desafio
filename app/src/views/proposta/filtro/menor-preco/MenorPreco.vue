@@ -20,7 +20,6 @@
             dialogCarregar: false,
             propostasLabel: [
                 {text: 'Forncedor', value: 'fornecedor', sortable: false},
-                {text: 'Nota', value: 'nota', sortable: false},
                 {text: 'Preço (R$)', value: 'preco', sortable: false},
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
