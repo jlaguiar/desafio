@@ -72,6 +72,9 @@
                 } else if (acao.label === 'Classificar nota preço') {
                     const path = `/maior-nota`
                     if (this.$route.path !== path) this.$router.push(path)
+                } else if (acao.label === 'Classificar menor preço') {
+                    const path = `/menor-preco`
+                    if (this.$route.path !== path) this.$router.push(path)
                 }
             }
         }
