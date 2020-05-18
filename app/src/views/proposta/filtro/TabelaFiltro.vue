@@ -1,5 +1,5 @@
 <template>
-    <card-titulo titulo="Classificação nota menor">
+    <card-titulo :titulo="label">
         <v-card-text>
             <v-data-table
                     :headers="propostasLabel"
@@ -29,7 +29,7 @@
     export default {
         name: "TabelaFIltro",
         components: {CardTitulo,BarraCarregamento},
-        props: ['propostasLabel','listaPropostas'],
+        props: ['propostasLabel','listaPropostas','label'],
         data: () => ({
             quantidadePaginas: 0,
             itensPorPagina: 10,

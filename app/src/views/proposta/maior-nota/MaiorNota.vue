@@ -2,7 +2,8 @@
     <div>
         <tabela-filtro :lista-propostas="listaPropostas"
                         :propostas-label="propostasLabel"
-                        @verMais="verMais"/>
+                       label="Classificação maior nota"
+                       @verMais="verMais"/>
         <barra-carregamento :dialog="dialogCarregar"
                             label="Carregando"/>
     </div>
