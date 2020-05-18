@@ -1,13 +1,11 @@
 <template>
     <div>
         <tabela-filtro :lista-propostas="listaPropostas"
-                        :propostas-label="propostasLabel"
-                       label="Classificação maior nota"
-                       @verMais="verMais"/>
+                       :propostas-label="propostasLabel"
+                       label="Classificação maior nota"/>
         <barra-carregamento :dialog="dialogCarregar"
                             label="Carregando"/>
     </div>
-
 </template>
 
 <script>
@@ -74,12 +72,7 @@
                 this.parseDataParaInteiro()
                 this.listaPropostas = await this.ordenarListaNotaMaior()
                 this.dialogCarregar = false
-            },
-            verMais(item) {
-
-            },
-
-
+            }
         }
     }
 </script>

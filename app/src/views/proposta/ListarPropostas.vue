@@ -59,6 +59,7 @@
                     sortable: false,
                     value: 'fornecedor',
                 },
+                {text: 'Tipo classificação', value: 'licitacao.tipoClassificacao', sortable: false},
                 {text: 'Preço (R$)', value: 'preco', sortable: false},
                 {text: 'Data', value: 'dataCadastro', sortable: false},
                 {text: 'Ações', value: 'actions', sortable: false},
