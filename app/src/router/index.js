@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import Inicio from '../views/Inicio.vue'
 import CadastrarProposta from '../views/proposta/CadastrarProposta'
 import ListarPropostas from '../views/proposta/ListarPropostas'
-import MaiorNota from '../views/proposta/maior-nota/MaiorNota'
-import MenorPreco from '../views/proposta/menor-preco/MenorPreco'
+import MaiorNota from '../views/proposta/filtro/maior-nota/MaiorNota'
+import MenorPreco from '../views/proposta/filtro/menor-preco/MenorPreco'
 
 Vue.use(VueRouter)
 

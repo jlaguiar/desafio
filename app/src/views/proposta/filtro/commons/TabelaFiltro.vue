@@ -23,11 +23,11 @@
 </template>
 
 <script>
-    import CardTitulo from '../../../components/CardTitulo'
-    import BarraCarregamento from '../../../components/BarraCarregamento'
+    import CardTitulo from '../../../../components/CardTitulo'
+    import BarraCarregamento from '../../../../components/BarraCarregamento'
 
     export default {
-        name: "TabelaFIltro",
+        name: 'TabelaFIltro',
         components: {CardTitulo,BarraCarregamento},
         props: ['propostasLabel','listaPropostas','label'],
         data: () => ({

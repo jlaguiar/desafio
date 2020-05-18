@@ -12,8 +12,8 @@
 
 <script>
     import {mapActions} from 'vuex'
-    import BarraCarregamento from '../../../components/BarraCarregamento'
-    import TabelaFiltro from '../filtro/TabelaFiltro'
+    import BarraCarregamento from '../../../../components/BarraCarregamento'
+    import TabelaFiltro from '../commons/TabelaFiltro'
 
     export default {
         name: 'MaiorNota',

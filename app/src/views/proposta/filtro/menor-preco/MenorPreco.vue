@@ -1,20 +1,21 @@
 <template>
     <div>
-        <tabela-f-iltro />
+        <tabela-filtro label="Classificação menor preço"
+                       :propostas-label="propostasLabel"
+                       :lista-propostas="listaPropostas"/>
         <barra-carregamento :dialog="dialogCarregar"
                             label="Carregando"/>
     </div>
-
 </template>
 
 <script>
-    import CardTitulo from '../../../components/CardTitulo'
     import {mapActions} from 'vuex'
-    import BarraCarregamento from '../../../components/BarraCarregamento'
-    import TabelaFIltro from "../filtro/TabelaFiltro";
+    import BarraCarregamento from '../../../../components/BarraCarregamento'
+    import TabelaFiltro from '../commons/TabelaFiltro'
+
     export default {
         name: 'MenorPreco',
-        components: {CardTitulo,BarraCarregamento,TabelaFIltro},
+        components: {BarraCarregamento, TabelaFiltro},
         data: () => ({
             dialogCarregar: false,
             propostasLabel: [
