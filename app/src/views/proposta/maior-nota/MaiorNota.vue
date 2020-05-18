@@ -1,43 +1,24 @@
 <template>
-    <card-titulo titulo="Classificação nota menor">
-        <v-card-text>
-            <v-data-table
-                    :headers="propostasLabel"
-                    :items="listaPropostas"
-                    class="elevation-1"
-                    :page.sync="pagina"
-                    hide-default-footer
-                    @page-count="quantidadePaginas = $event"
-                    :items-per-page="itensPorPagina">
-                <template v-slot:item.actions="{item}">
-                    <v-icon small class="mr-2" color="#fb8c00"
-                            @click="verMais(item)">
-                        visibility
-                    </v-icon>
-                </template>
-            </v-data-table>
-            <div class="text-center pt-2">
-                <v-pagination v-model="pagina" :length="quantidadePaginas" color="black"></v-pagination>
-            </div>
-        </v-card-text>
+    <div>
+        <tabela-filtro :lista-propostas="listaPropostas"
+                        :propostas-label="propostasLabel"
+                        @verMais="verMais"/>
         <barra-carregamento :dialog="dialogCarregar"
                             label="Carregando"/>
-    </card-titulo>
+    </div>
+
 </template>
 
 <script>
-    import CardTitulo from '../../../components/CardTitulo'
     import {mapActions} from 'vuex'
     import BarraCarregamento from '../../../components/BarraCarregamento'
+    import TabelaFiltro from '../filtro/TabelaFiltro'
 
     export default {
         name: 'MaiorNota',
-        components: {CardTitulo,BarraCarregamento},
+        components: {TabelaFiltro,BarraCarregamento},
         data: () => ({
             dialogCarregar: false,
-            quantidadePaginas: 0,
-            itensPorPagina: 10,
-            pagina: 1,
             propostasLabel: [
                 {text: 'Forncedor', value: 'fornecedor', sortable: false},
                 {text: 'Nota', value: 'nota', sortable: false},
@@ -94,7 +75,8 @@
                 this.listaPropostas = await this.ordenarListaNotaMaior()
                 this.dialogCarregar = false
             },
-            verMais() {
+            verMais(item) {
+
             },
 
 
