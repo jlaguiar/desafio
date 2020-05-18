@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar color="dark" dense dark>
+        <v-app-bar absolute color="dark" dense dark>
             <v-app-bar-nav-icon @click="controleNavigation = true">
             </v-app-bar-nav-icon>
             <v-toolbar-title>Desafio <span style="color: #fb8c00">AZI</span></v-toolbar-title>
@@ -45,11 +45,11 @@
                 },
                 {
                     label: 'Classificar nota preço',
-                    icon: 'star_border'
+                    icon: 'emoji_events'
                 },
                 {
                     label: 'Classificar menor preço',
-                    icon: 'star_border'
+                    icon: 'local_atm'
                 }
             ]
         }),

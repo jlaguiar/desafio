@@ -48,7 +48,6 @@
             quantidadePaginas: 0,
             itensPorPagina: 10,
             pagina: 1,
-            listaPropostasNota: []
         }),
     }
 </script>
