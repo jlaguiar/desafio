@@ -75,12 +75,18 @@
                 this.$router.push({name: 'cadastrarPropostaParametros', params: {proposta}})
             },
             async excluirProposta() {
-                this.fecharDialog()
-                this.labelDialogCarregar = 'Excluindo'
-                this.dialogCarregar = true
-                await this.excluir(this.propostaExcluir.id)
-                this.listaPropostas = await this.buscarPropostas()
-                this.dialogCarregar = false
+                try{
+                    this.fecharDialog()
+                    this.labelDialogCarregar = 'Excluindo'
+                    this.dialogCarregar = true
+                    await this.excluir(this.propostaExcluir.id)
+                    this.listaPropostas = await this.buscarPropostas()
+                    this.dialogCarregar = false
+                    this.$toasted.global.defaultSuccess()
+                }catch (e) {
+                    this.dialogCarregar = false
+                    this.$toasted.global.defaultError()
+                }
             },
             fecharDialog() {
                 this.dialogVerificacaoExcluir = false

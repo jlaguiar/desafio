@@ -66,9 +66,6 @@
                 this.listaPropostas = await this.ordenarListaMenorPreco()
                 this.dialogCarregar = false
             },
-            verMais(item) {
-
-            },
         }
     }
 </script>
