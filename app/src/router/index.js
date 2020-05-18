@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import Inicio from '../views/Inicio.vue'
 import CadastrarProposta from '../views/proposta/CadastrarProposta'
 import ListarPropostas from '../views/proposta/ListarPropostas'
-import MaiorNota from "../views/proposta/maior-nota/MaiorNota";
+import MaiorNota from '../views/proposta/maior-nota/MaiorNota'
+import MenorPreco from '../views/proposta/menor-preco/MenorPreco'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,6 +35,11 @@ const routes = [
         path: '/maior-nota',
         name: 'maiorNota',
         component: MaiorNota
+    },
+    {
+        path: '/menor-preco',
+        name: 'menorPreco',
+        component: MenorPreco
     },
 ]
 
