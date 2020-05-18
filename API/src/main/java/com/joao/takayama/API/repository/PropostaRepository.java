@@ -8,4 +8,6 @@ import java.util.List;
 public interface PropostaRepository extends MongoRepository<Proposta,String> {
 
     List<Proposta> findAllByNotaNotNull();
+
+    List<Proposta> findAllByNotaNull();
 }

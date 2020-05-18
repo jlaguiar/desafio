@@ -16,4 +16,5 @@ public interface IProposta {
 
     List<Proposta> buscarPropostasNotas();
 
+    List<Proposta> buscarPropostasPrecos();
 }

@@ -69,8 +69,8 @@
             },
             async preencherLista() {
                 this.dialogCarregar = true
-                this.listaPropostasNota = await this.bucarPropostasNotas()
-                this.parseDataParaInteiro()
+                this.listaPropostas = await this.bucarPropostasPrecos()
+                //this.parseDataParaInteiro()
                 //this.listaPropostas = await this.ordenarListaNotaMaior()
                 this.dialogCarregar = false
             },
