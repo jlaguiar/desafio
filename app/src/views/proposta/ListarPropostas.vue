@@ -1,5 +1,5 @@
 <template>
-    <card-titulo titulo="Listar propostas">
+    <card-titulo titulo="LISTAR PROPOSTAS">
         <v-card-text>
             <v-data-table
                     :headers="propostasLabel"
@@ -23,7 +23,7 @@
                 </template>
             </v-data-table>
             <div class="text-center pt-2">
-                <v-pagination v-model="pagina" :length="quantidadePaginas"></v-pagination>
+                <v-pagination v-model="pagina" :length="quantidadePaginas" color="black"></v-pagination>
             </div>
         </v-card-text>
         <dialog-exclusao
@@ -46,6 +46,7 @@
         name: 'ListarPropostas',
         components: {CardTitulo, DialogExclusao, BarraCarregamento},
         data: () => ({
+            labelDialogCarregar: '',
             dialogCarregar: false,
             propostaExcluir: {},
             dialogVerificacaoExcluir: false,
@@ -74,6 +75,7 @@
             },
             async excluirProposta() {
                 this.fecharDialog()
+                this.labelDialogCarregar = 'Excluindo'
                 this.dialogCarregar = true
                 await this.excluir(this.propostaExcluir.id)
                 this.listaPropostas = await this.buscarPropostas()
@@ -83,11 +85,15 @@
                 this.dialogVerificacaoExcluir = false
             },
             async preencherLista() {
+                this.labelDialogCarregar = 'Excluindo'
+                this.dialogCarregar = true
                 this.listaPropostas = await this.buscarPropostas()
+                this.dialogCarregar = false
             },
             verificarExcluir(proposta) {
                 this.dialogVerificacaoExcluir = true
                 this.propostaExcluir = proposta
+                this.dialogCarregar = false
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <card-titulo titulo="Maior nota, menor preço, menor data">
+    <card-titulo titulo="Classificação nota menor">
         <v-card-text>
             <v-data-table
                     :headers="propostasLabel"
@@ -28,10 +28,11 @@
 <script>
     import CardTitulo from '../../../components/CardTitulo'
     import {mapActions} from 'vuex'
+    import BarraCarregamento from '../../../components/BarraCarregamento'
 
     export default {
         name: 'MaiorNota',
-        components: {CardTitulo},
+        components: {CardTitulo,BarraCarregamento},
         data: () => ({
             dialogCarregar: false,
             quantidadePaginas: 0,
@@ -48,9 +49,7 @@
             listaPropostasNota: []
         }),
         async mounted() {
-            this.dialogCarregar = true
             await this.preencherLista()
-            this.dialogCarregar = false
         },
         methods: {
             ...mapActions(['bucarPropostasNotas']),
@@ -89,9 +88,11 @@
                 }, this.listaPropostasNota);
             },
             async preencherLista() {
+                this.dialogCarregar = true
                 this.listaPropostasNota = await this.bucarPropostasNotas()
                 this.parseDataParaInteiro()
                 this.listaPropostas = await this.ordenarListaNotaMaior()
+                this.dialogCarregar = false
             },
             verMais() {
             },
