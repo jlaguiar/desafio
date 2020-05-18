@@ -39,7 +39,6 @@
                     } else if (valor1.preco > valor2.preco) {
                         return 1
                     } else {
-                        debugger
                         if (valor1.dataCadastroInteiro < valor2.dataCadastroInteiro) {
                             return -1
                         } else if (valor1.dataCadastroInteiro > valor2.dataCadastroInteiro) {

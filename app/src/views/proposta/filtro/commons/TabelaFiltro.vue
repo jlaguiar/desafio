@@ -61,6 +61,7 @@
                 this.abrirDialogVisualizador = false
             },
             abrirVisualizador(proposta){
+                debugger
                 proposta.licitacao.tipoClassificacao = proposta.licitacao.tipoClassificacao === 'MENOR_PRECO'  ? 'Menor preço' : 'Nota preço'
                 this.propostaVisualizar = proposta
                 setTimeout(this.abrirDialogVisualizador = true,1000)
